@@ -2,14 +2,14 @@ class Particle {
     constructor(x, y, c) {
         this.pos = createVector(x, y);
         this.vel = p5.Vector.random2D();
-        this.vel.mult(width / random(75,200))
+        this.vel.mult(width / random(100,200))
         this.colour = c;
         this.center = createVector(x, y);
     }
 
     update() {
         this.pos.add(this.vel);
-        this.vel.mult(0.99);
+        this.vel.mult(0.25);
     }
     draw() {
         stroke(this.colour);
