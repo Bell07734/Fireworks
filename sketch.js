@@ -1,5 +1,11 @@
 let particles = [];
 
+let sound;
+
+function preload() {
+  sound = loadSound("Sound.wav");
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
@@ -18,6 +24,7 @@ function draw() {
 }
 
 function mousePressed() {
+  sound.play();
   createFireworks(mouseX, mouseY);
 }
 
@@ -28,7 +35,7 @@ function createFireworks(x, y) {
       particles.push(new Particle(x, y, "#FF0000"));
       particles.push(new Particle(x, y, "#FFFF00"));
       particles.push(new Particle(x, y, "#FFAA00"));
-    } else if  (rand == 1){
+    } else if (rand == 1) {
       particles.push(new Particle(x, y, "#00FF00"));
       particles.push(new Particle(x, y, "#00FFFF"));
       particles.push(new Particle(x, y, "#0000FF"));
