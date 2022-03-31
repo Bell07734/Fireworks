@@ -9,14 +9,14 @@ class Particle {
 
     update() {
         this.pos.add(this.vel);
-        this.vel.mult(0.25);
+        this.vel.mult(0.95);
     }
     draw() {
         stroke(this.colour);
         point(this.pos);
     }
     isMinVel() {
-        return sqrt(sq(this.vel.x) + sq(this.vel.y)) < 0.5
+        return sqrt(sq(this.vel.x) + sq(this.vel.y)) < 2
     }
 
     isMaxDist() {
