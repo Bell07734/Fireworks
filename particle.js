@@ -5,6 +5,8 @@ class Particle {
         this.vel.mult(width / random(100,200))
         this.colour = c;
         this.center = createVector(x, y);
+        this.minVel = random(0.5,3)
+        this.maxDist = width / random(1,5)
     }
 
     update() {
@@ -16,10 +18,10 @@ class Particle {
         point(this.pos);
     }
     isMinVel() {
-        return sqrt(sq(this.vel.x) + sq(this.vel.y)) < 2
+        return sqrt(sq(this.vel.x) + sq(this.vel.y)) < this.minVel
     }
 
     isMaxDist() {
-        return dist(this.pos.x, this.pos.y, this.center.x, this.center.y) > width / random(1,5)
+        return dist(this.pos.x, this.pos.y, this.center.x, this.center.y) > this.maxDist
     }
 }
