@@ -22,7 +22,7 @@ function mousePressed() {
 }
 
 function createFireworks(x, y) {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100; i++) {
     particles.push(new Particle(x, y, "#FF0000"));
     particles.push(new Particle(x, y, "#FFFF00"));
     particles.push(new Particle(x, y, "#FFAA00"));
