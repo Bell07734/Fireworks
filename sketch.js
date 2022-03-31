@@ -5,9 +5,6 @@ function setup() {
 }
 
 function draw() {
-  particles.push(new Particle(width / 2, height / 2, "#FF0000"))
-  particles.push(new Particle(width / 2, height / 2, "#00FF00"))
-  particles.push(new Particle(width / 2, height / 2, "#0000FF"))
   background(0);
   strokeWeight(2);
   for (let i = particles.length - 1; i > 0; i--) {
@@ -17,5 +14,17 @@ function draw() {
     if (particle.isMinVel() || particle.isMaxDist()) {
       particles.splice(i, 1);
     }
+  }
+}
+
+function mousePressed() {
+  createFireworks(mouseX, mouseY);
+}
+
+function createFireworks(x, y) {
+  for (let i = 0; i < 50; i++) {
+    particles.push(new Particle(x, y, "#FF0000"));
+    particles.push(new Particle(x, y, "#FFFF00"));
+    particles.push(new Particle(x, y, "#FFAA00"));
   }
 }
