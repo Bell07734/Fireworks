@@ -15,8 +15,8 @@ class Particle {
 
     update() {
         this.pos.add(this.vel);
-        this.vel.mult(0.95);
         this.vel.add(this.gravity);
+        this.vel.mult(0.95);
         this.time ++;
     }
     draw() {
