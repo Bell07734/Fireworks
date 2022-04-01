@@ -24,6 +24,6 @@ class Particle {
     }
 
     isMaxTime() {
-        return this.time >= maxTime;
+        return this.time >= this.maxTime;
     }
 }
