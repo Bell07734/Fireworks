@@ -6,12 +6,14 @@ class Particle {
         this.colour = c;
         this.center = createVector(x, y);
         this.minVel = random(0.5,3)
-        this.maxDist = width / random(1,5)
+        this.maxTime = random(70,100)
+        this.time = 0;
     }
 
     update() {
         this.pos.add(this.vel);
         this.vel.mult(0.95);
+        this.time ++;
     }
     draw() {
         stroke(this.colour);
@@ -21,7 +23,7 @@ class Particle {
         return sqrt(sq(this.vel.x) + sq(this.vel.y)) < this.minVel
     }
 
-    isMaxDist() {
-        return dist(this.pos.x, this.pos.y, this.center.x, this.center.y) > this.maxDist
+    isMaxTime() {
+        return this.time >= maxTime;
     }
 }

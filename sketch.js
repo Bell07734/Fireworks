@@ -17,7 +17,7 @@ function draw() {
     let particle = particles[i];
     particle.update();
     particle.draw();
-    if (particle.isMinVel() || particle.isMaxDist()) {
+    if (particle.isMinVel() || particle.isMaxTime()) {
       particles.splice(i, 1);
     }
   }
