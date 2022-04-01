@@ -1,10 +1,5 @@
 let particles = [];
 
-let sound;
-
-function preload() {
-  sound = loadSound("Sound.wav");
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -24,7 +19,6 @@ function draw() {
 }
 
 function mousePressed() {
-  sound.play();
   createFireworks(mouseX, mouseY);
 }
 
