@@ -11,7 +11,7 @@ let count = 0;
 //let sound;
 
 //function preload() {
-//sound = loadSound("Sound.wav");
+//  sound = loadSound("Sound.wav");
 //}
 
 function setup() {
@@ -34,18 +34,33 @@ function draw() {
 }
 
 function mousePressed() {
-  //  sound.play();
+  //sound.play();
   createFirework(mouseX, mouseY, floor(random(3)));
 }
 
 function createFirework(x, y, index) {
-  for (let i = 0; i < 300; i++) {
-    particles.push(new Particle(x, y, "#FF0000"));
+  let chosenColours = allColours[index];
+  for (let i = 0; i < 300/ chosenColours.length; i++) {
+    for (let j = 0; j < chosenColours.length; j++) {
+      particles.push(new Particle(x, y, chosenColours[j]));
+    }
   }
 }
 
 function fireworkDisplay() {
   if (count == 30) {
-    createFirework(width / 3, height / 2, 0)
+    createFirework(width / 3, height / 2, 0);
+  } else if (count == 60) {
+    createFirework(2 * width / 3, height / 2, 1);
+  } else if (count == 90) {
+    createFirework(width / 3, height / 2, 2);
+  } else if (count == 120) {
+    createFirework(2 * width / 3, height / 2, 1);
+  } else if (count == 150) {
+    createFirework(width / 3, height / 2, 1);
+  } else if (count == 155) {
+    createFirework(2 * width / 3, height / 2, 2);
+  } else if (count == 160) {
+    createFirework(width / 2, height / 3, 0);
   }
 }
