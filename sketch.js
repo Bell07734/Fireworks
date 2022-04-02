@@ -1,9 +1,17 @@
 let particles = [];
 
+let allColours = [
+  ["#FF0000", "#FFFF00", "#FFAA00"],
+  ["#00FF00", "#00FFFF", "#0000FF"],
+  ["#FF00AA", "#AA00FF", "#FF00FF"]
+];
+
+let count = 0;
+
 //let sound;
 
 //function preload() {
-  //sound = loadSound("Sound.wav");
+//sound = loadSound("Sound.wav");
 //}
 
 function setup() {
@@ -12,6 +20,7 @@ function setup() {
 
 function draw() {
   background(0);
+  fireworkDisplay()
   strokeWeight(2);
   for (let i = particles.length - 1; i > 0; i--) {
     let particle = particles[i];
@@ -21,28 +30,22 @@ function draw() {
       particles.splice(i, 1);
     }
   }
+  count++;
 }
 
 function mousePressed() {
-//  sound.play();
-  createFireworks(mouseX, mouseY);
+  //  sound.play();
+  createFirework(mouseX, mouseY, floor(random(3)));
 }
 
-function createFireworks(x, y) {
-  let rand = floor(random(3));
-  for (let i = 0; i < 100; i++) {
-    if (rand == 0) {
-      particles.push(new Particle(x, y, "#FF0000"));
-      particles.push(new Particle(x, y, "#FFFF00"));
-      particles.push(new Particle(x, y, "#FFAA00"));
-    } else if (rand == 1) {
-      particles.push(new Particle(x, y, "#00FF00"));
-      particles.push(new Particle(x, y, "#00FFFF"));
-      particles.push(new Particle(x, y, "#0000FF"));
-    } else {
-      particles.push(new Particle(x, y, "#FF00AA"));
-      particles.push(new Particle(x, y, "#AA00FF"));
-      particles.push(new Particle(x, y, "#FF00FF"));
-    }
+function createFirework(x, y, index) {
+  for (let i = 0; i < 300; i++) {
+    particles.push(new Particle(x, y, "#FF0000"));
+  }
+}
+
+function fireworkDisplay() {
+  if (count == 30) {
+    createFirework(width / 3, height / 2, 0)
   }
 }
