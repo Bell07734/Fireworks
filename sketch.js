@@ -70,6 +70,8 @@ function fireworkDisplay() {
     createFirework(2 * width / 3, height / 2, 2);
   } else if (count == 160) {
     createFirework(width / 2, height / 3, 0);
+  }else if (count > 170){
+    stopDisplay()
   }
 }
 
