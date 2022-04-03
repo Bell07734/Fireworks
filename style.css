@@ -1,7 +1,29 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
+
 canvas {
   display: block;
+}
+
+button {
+  transition-duration: 0.2s;
+  background-color: slategray;
+  border-radius: 8px;
+  font-size: 20px;
+  padding: 8px 14px;
+  border: 2px solid slategray;
+  box-shadow: 0 8px rgb(180, 180, 180);
+}
+
+button:hover {
+  background-color: #00000000;
+}
+
+button:active {
+  background-color: #00000000;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
 }
