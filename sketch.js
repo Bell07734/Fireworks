@@ -17,9 +17,11 @@ let button, display;
 //}
 
 function setup() {
-  createCanvas(windowWidth, windowHeight - 50);
-  button = createButton("Start Display")
-  button.mousePressed(startDisplay)
+  createCanvas(windowWidth, windowHeight);
+  // button = createButton("Start Display")
+  // button.mousePressed(startDisplay)
+  button = new Button(10 * width / 50, 18 * height / 20, width / 5, height / 20, 200, 100, 100, "Start Display", buttonPressed);
+  button.buttonDown(startDisplay)
 }
 
 function draw() {
@@ -37,13 +39,26 @@ function draw() {
       particles.splice(i, 1);
     }
   }
+  if (button.isHovered()) {
+    button.transparencyChange()
+    if (mouseIsPressed) {
+      button.buttonDown();
+    } else {
+      button.buttonUp();
+    }
+  } else {
+    button.solidColour();
+  }
+  button.draw()
 }
 
 function mousePressed() {
-  if (!display && mouseY < height) {
+  if (!display && mouseY < height && !button.isHovered()) {
     //sound.play();
     createFirework(mouseX, mouseY, floor(random(3)));
   }
+  button.update();
+  button.draw();
 }
 
 function createFirework(x, y, index) {
@@ -70,20 +85,26 @@ function fireworkDisplay() {
     createFirework(2 * width / 3, height / 2, 2);
   } else if (count == 160) {
     createFirework(width / 2, height / 3, 0);
-  }else if (count > 170){
+  } else if (count > 170) {
     stopDisplay()
+  }
+}
+
+function buttonPressed() {
+  if (display) {
+    stopDisplay()
+  } else {
+    startDisplay()
   }
 }
 
 function startDisplay() {
   display = true;
-  button.html("Stop Display");
-  button.mousePressed(stopDisplay)
+  button.text = "Stop Display"
 }
 
 function stopDisplay() {
   display = false;
-  button.html("Start Display")
-  button.mousePressed(startDisplay)
   count = 0;
+  button.text = "Start Display"
 }
