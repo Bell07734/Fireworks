@@ -8,7 +8,9 @@ let allColours = [
 
 let count = 0;
 
-let button, display;
+let startButton, randomButton, buttons;
+let display;
+let colourIndex;
 
 //let sound;
 
@@ -18,10 +20,15 @@ let button, display;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // button = createButton("Start Display")
-  // button.mousePressed(startDisplay)
-  button = new Button(10 * width / 50, 18 * height / 20, width / 5, height / 20, 200, 100, 100, "Start Display", buttonPressed);
-  button.buttonDown(startDisplay)
+  // startButton = createButton("Start Display")
+  // startButton.mousePressed(startDisplay)
+  startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", buttonPressed);
+  randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "R", setColour)
+  orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "", setColour, 0)
+  greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "", setColour, 1)
+  pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "", setColour, 2)
+  buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton]
+  colourIndex = floor(random(3))
 }
 
 function draw() {
@@ -39,26 +46,37 @@ function draw() {
       particles.splice(i, 1);
     }
   }
-  if (button.isHovered()) {
-    button.transparencyChange()
-    if (mouseIsPressed) {
-      button.buttonDown();
+  for (let button of buttons) {
+    if (button.isHovered()) {
+      button.transparencyChange()
     } else {
-      button.buttonUp();
+      button.solidColour()
     }
-  } else {
-    button.solidColour();
+    button.draw()
   }
-  button.draw()
 }
 
 function mousePressed() {
-  if (!display && mouseY < height && !button.isHovered()) {
+  if (!display && mouseY < height && !startButton.isHovered()) {
     //sound.play();
-    createFirework(mouseX, mouseY, floor(random(3)));
+    if (colourIndex == -1) {
+      createFirework(mouseX, mouseY, floor(random(3)));
+    } else {
+      createFirework(mouseX, mouseY, colourIndex);
+    }
   }
-  button.update();
-  button.draw();
+  for (let button of buttons) {
+    if (button.isHovered()) {
+      button.buttonDown()
+      button.function(button)
+    }
+  }
+}
+
+function mouseReleased() {
+  for (let button of buttons) {
+    button.buttonUp()
+  }
 }
 
 function createFirework(x, y, index) {
@@ -98,13 +116,21 @@ function buttonPressed() {
   }
 }
 
-function startDisplay() {
+function startDisplay(button) {
   display = true;
-  button.text = "Stop Display"
+  startButton.text = "Stop Display"
 }
 
-function stopDisplay() {
+function stopDisplay(button) {
   display = false;
   count = 0;
-  button.text = "Start Display"
+  startButton.text = "Start Display"
+}
+
+function setColour(button) {
+  if (randomButton.isHovered()) {
+    colourIndex = -1
+  } else {
+    colourIndex = button.index
+  }
 }
