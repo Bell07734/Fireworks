@@ -11,6 +11,7 @@ let count = 0;
 let startButton, randomButton, buttons;
 let display;
 let colourIndex;
+let buttonsAreHovered;
 
 //let sound;
 
@@ -22,11 +23,11 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   // startButton = createButton("Start Display")
   // startButton.mousePressed(startDisplay)
-  startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", buttonPressed);
-  randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "R", setColour)
-  orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "", setColour, 0)
-  greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "", setColour, 1)
-  pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "", setColour, 2)
+  startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", 255, buttonPressed);
+  randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "R", 0, setColour)
+  orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "", 0, setColour, 0)
+  greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "", 0, setColour, 1)
+  pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "", 0, setColour, 2)
   buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton]
   colourIndex = floor(random(3))
 }
@@ -46,8 +47,10 @@ function draw() {
       particles.splice(i, 1);
     }
   }
+  buttonsAreHovered = false;
   for (let button of buttons) {
     if (button.isHovered()) {
+      buttonsAreHovered = true;
       button.transparencyChange()
     } else {
       button.solidColour()
@@ -57,7 +60,7 @@ function draw() {
 }
 
 function mousePressed() {
-  if (!display && mouseY < height && !startButton.isHovered()) {
+  if (!display && mouseY < height && !buttonsAreHovered) {
     //sound.play();
     if (colourIndex == -1) {
       createFirework(mouseX, mouseY, floor(random(3)));
