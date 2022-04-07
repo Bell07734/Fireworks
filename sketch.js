@@ -29,7 +29,7 @@ function setup() {
   greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "", 0, setColour, 1)
   pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "", 0, setColour, 2)
   buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton]
-  colourIndex = floor(random(3))
+  colourIndex = -1
 }
 
 function draw() {
