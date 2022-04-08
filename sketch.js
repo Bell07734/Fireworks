@@ -48,6 +48,15 @@ function draw() {
       particles.splice(i, 1);
     }
   }
+  for (let i = 0; i < rockets.length; i++) {
+    let rocket = rockets[i]
+    rocket.update()
+    rocket.draw()
+    if (rocket.isMinY()) {
+      createFirework(rocket.x, rocket.y, rocket.index);
+      rockets.splice(i, 1)
+    }
+  }
   buttonsAreHovered = false;
   for (let button of buttons) {
     if (button.isHovered()) {
@@ -57,15 +66,6 @@ function draw() {
       button.solidColour()
     }
     button.draw()
-  }
-  for (let i = 0; i < rockets.length; i++) {
-    let rocket = rockets[i]
-    rocket.update()
-    rocket.draw()
-    if (rocket.isMinY()) {
-      createFirework(rocket.x, rocket.y, rocket.index);
-      rockets.splice(i, 1)
-    }
   }
 }
 
