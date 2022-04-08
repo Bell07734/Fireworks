@@ -9,10 +9,9 @@ class Rocket {
     }
     update() {
         this.y -= this.velY;
-        this.velY *= 0.95;
+        this.velY *= 0.96;
     }
     isMinY() {
-        console.log(this.y, this.minY)
         return this.y <= this.minY;
     }
     draw() {

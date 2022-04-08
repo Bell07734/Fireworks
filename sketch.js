@@ -14,16 +14,16 @@ let colourIndex;
 let buttonsAreHovered;
 let rockets = [];
 
-//let sound;
+let sound;
 
-//function preload() {
-//  sound = loadSound("Sound.wav");
-//}
+function preload() {
+  sound = loadSound("Sound.wav");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // startButton = createButton("Start Display")
-  // startButton.mousePressed(startDisplay)
+  startButton = createButton("Start Display")
+  startButton.mousePressed(startDisplay)
   startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", 255, buttonPressed);
   randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "R", 0, setColour)
   orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "", 0, setColour, 0)
@@ -71,7 +71,6 @@ function draw() {
 
 function mousePressed() {
   if (!display && mouseY < height && !buttonsAreHovered) {
-    //sound.play();
     if (colourIndex == -1) {
       createFirework(mouseX, mouseY, floor(random(3)));
     } else {
@@ -93,6 +92,7 @@ function mouseReleased() {
 }
 
 function createFirework(x, y, index) {
+  sound.play();
   let chosenColours = allColours[index];
   for (let i = 0; i < 300 / chosenColours.length; i++) {
     for (let j = 0; j < chosenColours.length; j++) {
@@ -106,7 +106,10 @@ function fireworkDisplay() {
     rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
   } else if (count == 40) {
     rockets.push(new Rocket(2 * width / 3, height, height / 2, "#01FFFF", 1))
-  } else if (count == 50) {
+  } else if (count == 70) {
+    rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
+    rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
+  } else if (count == 150) {
     stopDisplay()
   }
 }
