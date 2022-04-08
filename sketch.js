@@ -12,6 +12,7 @@ let startButton, randomButton, buttons;
 let display;
 let colourIndex;
 let buttonsAreHovered;
+let rockets = [];
 
 //let sound;
 
@@ -57,6 +58,15 @@ function draw() {
     }
     button.draw()
   }
+  for (let i = 0; i < rockets.length; i++) {
+    let rocket = rockets[i]
+    rocket.update()
+    rocket.draw()
+    if (rocket.isMinY()) {
+      createFirework(rocket.x, rocket.y, rocket.index);
+      rockets.splice(i, 1)
+    }
+  }
 }
 
 function mousePressed() {
@@ -93,20 +103,10 @@ function createFirework(x, y, index) {
 
 function fireworkDisplay() {
   if (count == 30) {
-    createFirework(width / 3, height / 2, 0);
-  } else if (count == 60) {
-    createFirework(2 * width / 3, height / 2, 1);
-  } else if (count == 90) {
-    createFirework(width / 3, height / 2, 2);
-  } else if (count == 120) {
-    createFirework(2 * width / 3, height / 2, 1);
-  } else if (count == 150) {
-    createFirework(width / 3, height / 2, 1);
-  } else if (count == 155) {
-    createFirework(2 * width / 3, height / 2, 2);
-  } else if (count == 160) {
-    createFirework(width / 2, height / 3, 0);
-  } else if (count > 170) {
+    rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
+  } else if (count == 40) {
+    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#01FFFF", 1))
+  } else if (count == 50) {
     stopDisplay()
   }
 }
