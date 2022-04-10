@@ -25,10 +25,10 @@ function setup() {
   startButton = createButton("Start Display")
   startButton.mousePressed(startDisplay)
   startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", 255, buttonPressed);
-  randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "R", 0, setColour)
-  orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "", 0, setColour, 0)
-  greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "", 0, setColour, 1)
-  pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "", 0, setColour, 2)
+  randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "0", 0, setColour)
+  orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "1", 0, setColour, 0)
+  greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "2", 0, setColour, 1)
+  pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "3", 0, setColour, 2)
   buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton]
   colourIndex = -1
 }
@@ -70,7 +70,7 @@ function draw() {
 }
 
 function mousePressed() {
-  if (!display && mouseY < height && !buttonsAreHovered) {
+  if (!display && !buttonsAreHovered) {
     if (colourIndex == -1) {
       createFirework(mouseX, mouseY, floor(random(3)));
     } else {
@@ -85,58 +85,70 @@ function mousePressed() {
   }
 }
 
-function mouseReleased() {
-  for (let button of buttons) {
-    button.buttonUp()
-  }
-}
-
-function createFirework(x, y, index) {
-  sound.play();
-  let chosenColours = allColours[index];
-  for (let i = 0; i < 300 / chosenColours.length; i++) {
-    for (let j = 0; j < chosenColours.length; j++) {
-      particles.push(new Particle(x, y, chosenColours[j]));
+function keyPressed() {
+  if (!display && !buttonsAreHovered) {
+      if (key == 0 || key == "R" || key == "r") {
+        colourIndex = -1;
+        createFirework(mouseX, mouseY, floor(random(3)))
+      } else if (key == 1 || key == 2 || key == 3) {
+        colourIndex = key - 1;
+        createFirework(mouseX, mouseY, colourIndex)
+      }
     }
   }
-}
 
-function fireworkDisplay() {
-  if (count == 30) {
-    rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
-  } else if (count == 40) {
-    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#01FFFF", 1))
-  } else if (count == 70) {
-    rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
-    rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
-  } else if (count == 150) {
-    stopDisplay()
+  function mouseReleased() {
+    for (let button of buttons) {
+      button.buttonUp()
+    }
   }
-}
 
-function buttonPressed() {
-  if (display) {
-    stopDisplay()
-  } else {
-    startDisplay()
+  function createFirework(x, y, index) {
+    sound.play();
+    let chosenColours = allColours[index];
+    for (let i = 0; i < 300 / chosenColours.length; i++) {
+      for (let j = 0; j < chosenColours.length; j++) {
+        particles.push(new Particle(x, y, chosenColours[j]));
+      }
+    }
   }
-}
 
-function startDisplay(button) {
-  display = true;
-  startButton.text = "Stop Display"
-}
-
-function stopDisplay(button) {
-  display = false;
-  count = 0;
-  startButton.text = "Start Display"
-}
-
-function setColour(button) {
-  if (randomButton.isHovered()) {
-    colourIndex = -1
-  } else {
-    colourIndex = button.index
+  function fireworkDisplay() {
+    if (count == 30) {
+      rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
+    } else if (count == 40) {
+      rockets.push(new Rocket(2 * width / 3, height, height / 2, "#01FFFF", 1))
+    } else if (count == 70) {
+      rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
+      rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
+    } else if (count == 150) {
+      stopDisplay()
+    }
   }
-}
+
+  function buttonPressed() {
+    if (display) {
+      stopDisplay()
+    } else {
+      startDisplay()
+    }
+  }
+
+  function startDisplay(button) {
+    display = true;
+    startButton.text = "Stop Display"
+  }
+
+  function stopDisplay(button) {
+    display = false;
+    count = 0;
+    startButton.text = "Start Display"
+  }
+
+  function setColour(button) {
+    if (randomButton.isHovered()) {
+      colourIndex = -1
+    } else {
+      colourIndex = button.index
+    }
+  }
