@@ -87,68 +87,75 @@ function mousePressed() {
 
 function keyPressed() {
   if (!display && !buttonsAreHovered) {
-      if (key == 0 || key == "R" || key == "r") {
-        colourIndex = -1;
-        createFirework(mouseX, mouseY, floor(random(3)))
-      } else if (key == 1 || key == 2 || key == 3) {
-        colourIndex = key - 1;
-        createFirework(mouseX, mouseY, colourIndex)
-      }
+    if (key == 0 || key == "R" || key == "r") {
+      colourIndex = -1;
+      createFirework(mouseX, mouseY, floor(random(3)))
+    } else if (key == 1 || key == 2 || key == 3) {
+      colourIndex = key - 1;
+      createFirework(mouseX, mouseY, colourIndex)
     }
   }
+}
 
-  function mouseReleased() {
-    for (let button of buttons) {
-      button.buttonUp()
+function mouseReleased() {
+  for (let button of buttons) {
+    button.buttonUp()
+  }
+}
+
+function createFirework(x, y, index) {
+  sound.play();
+  let chosenColours = allColours[index];
+  for (let i = 0; i < 300 / chosenColours.length; i++) {
+    for (let j = 0; j < chosenColours.length; j++) {
+      particles.push(new Particle(x, y, chosenColours[j]));
     }
   }
+}
 
-  function createFirework(x, y, index) {
-    sound.play();
-    let chosenColours = allColours[index];
-    for (let i = 0; i < 300 / chosenColours.length; i++) {
-      for (let j = 0; j < chosenColours.length; j++) {
-        particles.push(new Particle(x, y, chosenColours[j]));
-      }
-    }
+function fireworkDisplay() {
+  if (count == 30) {
+    rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
+  } else if (count == 40) {
+    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#00FFFF", 1))
+  } else if (count == 70) {
+    rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
+    rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
+  } else if (count == 150) {
+    rockets.push(new Rocket(width / 2, height, height / 2, "#FFAA00", 0))
+  } else if (count == 180) {
+    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#00FFFF", 1))
+    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#00FFFF", 1))
+  } else if (count == 210) {
+    rockets.push(new Rocket(width / 2, height, height / 3, "#FF00FF", 2))
+  } else if (count == 270) {
+    stopDisplay()
   }
+}
 
-  function fireworkDisplay() {
-    if (count == 30) {
-      rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
-    } else if (count == 40) {
-      rockets.push(new Rocket(2 * width / 3, height, height / 2, "#01FFFF", 1))
-    } else if (count == 70) {
-      rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
-      rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
-    } else if (count == 150) {
-      stopDisplay()
-    }
+function buttonPressed() {
+  if (display) {
+    stopDisplay()
+  } else {
+    startDisplay()
   }
+}
 
-  function buttonPressed() {
-    if (display) {
-      stopDisplay()
-    } else {
-      startDisplay()
-    }
-  }
+function startDisplay(button) {
+  display = true;
+  startButton.text = "Stop Display"
+}
 
-  function startDisplay(button) {
-    display = true;
-    startButton.text = "Stop Display"
-  }
+function stopDisplay(button) {
+  display = false;
+  count = 0;
+  startButton.text = "Start Display"
+}
 
-  function stopDisplay(button) {
-    display = false;
-    count = 0;
-    startButton.text = "Start Display"
+function setColour(button) {
+  if (randomButton.isHovered()) {
+    colourIndex = -1
+  } else {
+    colourIndex = button.index
   }
-
-  function setColour(button) {
-    if (randomButton.isHovered()) {
-      colourIndex = -1
-    } else {
-      colourIndex = button.index
-    }
-  }
+}
