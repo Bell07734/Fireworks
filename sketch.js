@@ -22,14 +22,13 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  startButton = createButton("Start Display")
-  startButton.mousePressed(startDisplay)
   startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", 255, buttonPressed);
   randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "0", 0, setColour)
   orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "1", 0, setColour, 0)
   greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "2", 0, setColour, 1)
   pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "3", 0, setColour, 2)
-  buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton]
+  helpButton = new Button(7 * width / 8, height / 10, height / 20, height / 20, 26, 115, 255, "?", 232, instructions)
+  buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton]
   colourIndex = -1
 }
 
@@ -158,4 +157,8 @@ function setColour(button) {
   } else {
     colourIndex = button.index
   }
+}
+
+function instructions() {
+  alert("INSTRUCTIONS\n•Click on the screen to make fireworks\n•Press the different buttons to switch colours\n•Or start a firework at the mouse by pressing the corrresponding keys:\n   Random - 0 or R\n   Green - 1\n   Orange - 2\n   Pink - 3\n•You can also watch a preprogrammed display by pressing the start display button")
 }
