@@ -2,7 +2,7 @@ class Rocket {
     constructor(x, y, my, c, i) {
         this.x = x;
         this.y = y;
-        this.velY = 25;
+        this.velY = (y - my) / 20;
         this.minY = my;
         this.colour = c;
         this.index = i;
