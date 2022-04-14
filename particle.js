@@ -1,3 +1,7 @@
+//
+// PARTICLE
+//
+
 class Particle {
     constructor(x, y, c) {
         this.pos = createVector(x, y);

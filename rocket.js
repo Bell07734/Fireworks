@@ -1,3 +1,7 @@
+//
+//ROCKET
+//
+
 class Rocket {
     constructor(x, y, my, c, i) {
         this.x = x;

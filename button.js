@@ -1,3 +1,7 @@
+//
+//BUTTON
+//
+
 class Button {
     constructor(x, y, w, h, r, g, b, t, tc, f, i) {
         this.x = x;

@@ -1,3 +1,7 @@
+//
+// ---SETUP---
+//
+
 let particles = [];
 
 let allColours = [
@@ -31,6 +35,11 @@ function setup() {
   buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton]
   colourIndex = -1
 }
+
+
+//
+// MAIN LOOP
+//
 
 function draw() {
   background(0);
@@ -68,6 +77,10 @@ function draw() {
   }
 }
 
+//
+// FUNCTIONS
+//
+
 function mousePressed() {
   if (!display && !buttonsAreHovered) {
     if (colourIndex == -1) {
@@ -84,51 +97,9 @@ function mousePressed() {
   }
 }
 
-function keyPressed() {
-  if (!display && !buttonsAreHovered) {
-    if (key == 0 || key == "R" || key == "r") {
-      colourIndex = -1;
-      createFirework(mouseX, mouseY, floor(random(3)))
-    } else if (key == 1 || key == 2 || key == 3) {
-      colourIndex = key - 1;
-      createFirework(mouseX, mouseY, colourIndex)
-    }
-  }
-}
-
 function mouseReleased() {
   for (let button of buttons) {
     button.buttonUp()
-  }
-}
-
-function createFirework(x, y, index) {
-  sound.play();
-  let chosenColours = allColours[index];
-  for (let i = 0; i < 300 / chosenColours.length; i++) {
-    for (let j = 0; j < chosenColours.length; j++) {
-      particles.push(new Particle(x, y, chosenColours[j]));
-    }
-  }
-}
-
-function fireworkDisplay() {
-  if (count == 30) {
-    rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
-  } else if (count == 40) {
-    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#00FFFF", 1))
-  } else if (count == 70) {
-    rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
-    rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
-  } else if (count == 150) {
-    rockets.push(new Rocket(width / 2, height, height / 2, "#FFAA00", 0))
-  } else if (count == 180) {
-    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#00FFFF", 1))
-    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#00FFFF", 1))
-  } else if (count == 210) {
-    rockets.push(new Rocket(width / 2, height, height / 3, "#FF00FF", 2))
-  } else if (count == 270) {
-    stopDisplay()
   }
 }
 
@@ -161,4 +132,46 @@ function setColour(button) {
 
 function instructions() {
   alert("INSTRUCTIONS\n•Click on the screen to make fireworks\n•Press the different buttons to switch colours\n•Or start a firework at the mouse by pressing the corrresponding keys:\n   Random - 0 or R\n   Green - 1\n   Orange - 2\n   Pink - 3\n•You can also watch a preprogrammed display by pressing the start display button")
+}
+
+function keyPressed() {
+  if (!display && !buttonsAreHovered) {
+    if (key == 0 || key == "R" || key == "r") {
+      colourIndex = -1;
+      createFirework(mouseX, mouseY, floor(random(3)))
+    } else if (key == 1 || key == 2 || key == 3) {
+      colourIndex = key - 1;
+      createFirework(mouseX, mouseY, colourIndex)
+    }
+  }
+}
+
+function createFirework(x, y, index) {
+  sound.play();
+  let chosenColours = allColours[index];
+  for (let i = 0; i < 300 / chosenColours.length; i++) {
+    for (let j = 0; j < chosenColours.length; j++) {
+      particles.push(new Particle(x, y, chosenColours[j]));
+    }
+  }
+}
+
+function fireworkDisplay() {
+  if (count == 30) {
+    rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
+  } else if (count == 40) {
+    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#00FFFF", 1))
+  } else if (count == 70) {
+    rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
+    rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
+  } else if (count == 150) {
+    rockets.push(new Rocket(width / 2, height, height / 2, "#FFAA00", 0))
+  } else if (count == 180) {
+    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#00FFFF", 1))
+    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#00FFFF", 1))
+  } else if (count == 210) {
+    rockets.push(new Rocket(width / 2, height, height / 3, "#FF00FF", 2))
+  } else if (count == 270) {
+    stopDisplay()
+  }
 }
