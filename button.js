@@ -43,6 +43,7 @@ class Button {
         fill(this.color);
         rectMode(CENTER);
         stroke(255)
+        strokeWeight(2);
         rect(this.x, this.y, this.width, this.height, this.height / 4);
         textAlign(CENTER, CENTER);
         textSize(this.height / 2)
