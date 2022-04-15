@@ -12,7 +12,7 @@ let allColours = [
 
 let count = 0;
 
-let startButton, randomButton, buttons;
+let startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton, muteButton, buttons;
 let display;
 let colourIndex;
 let buttonsAreHovered;
