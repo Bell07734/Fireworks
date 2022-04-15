@@ -19,6 +19,7 @@ let buttonsAreHovered;
 let rockets = [];
 
 let sound;
+let soundOn = true;
 
 function preload() {
   sound = loadSound("Sound.wav");
@@ -26,13 +27,14 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", 255, buttonPressed);
+  startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", 255, startButtonPressed);
   randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "0", 0, setColour)
   orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "1", 0, setColour, 0)
   greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "2", 0, setColour, 1)
   pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "3", 0, setColour, 2)
-  helpButton = new Button(7 * width / 8, height / 10, height / 20, height / 20, 26, 115, 255, "?", 232, instructions)
-  buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton]
+  helpButton = new Button(width - height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "?", 255, instructions)
+  muteButton = new Button(height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "🔈", 0, muteButtonPressed)
+  buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton, muteButton]
   colourIndex = -1
 }
 
@@ -103,7 +105,7 @@ function mouseReleased() {
   }
 }
 
-function buttonPressed() {
+function startButtonPressed() {
   if (display) {
     stopDisplay()
   } else {
@@ -134,6 +136,26 @@ function instructions() {
   alert("INSTRUCTIONS\n•Click on the screen to make fireworks\n•Press the different buttons to switch colours\n•Or start a firework at the mouse by pressing the corrresponding keys:\n   Random - 0 or R\n   Green - 1\n   Orange - 2\n   Pink - 3\n•You can also watch a preprogrammed display by pressing the start display button")
 }
 
+function muteButtonPressed() {
+  if (soundOn) {
+    mute()
+  } else {
+    unmute()
+  }
+}
+
+function mute() {
+  muteButton.text = "🔊"
+  soundOn = false
+  console.log("muted")
+}
+
+function unmute() {
+  muteButton.text = "🔈"
+  soundOn = true
+  console.log("unMuted")
+}
+
 function keyPressed() {
   if (!display && !buttonsAreHovered) {
     if (key == 0 || key == "R" || key == "r") {
@@ -147,7 +169,9 @@ function keyPressed() {
 }
 
 function createFirework(x, y, index) {
-  sound.play();
+  if (soundOn) {
+    sound.play();
+  }
   let chosenColours = allColours[index];
   for (let i = 0; i < 300 / chosenColours.length; i++) {
     for (let j = 0; j < chosenColours.length; j++) {
