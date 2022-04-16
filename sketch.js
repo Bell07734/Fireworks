@@ -147,13 +147,11 @@ function muteButtonPressed() {
 function mute() {
   muteButton.text = "🔊"
   soundOn = false
-  console.log("muted")
 }
 
 function unmute() {
   muteButton.text = "🔈"
   soundOn = true
-  console.log("unMuted")
 }
 
 function keyPressed() {
