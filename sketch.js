@@ -194,6 +194,37 @@ function fireworkDisplay() {
   } else if (count == 210) {
     rockets.push(new Rocket(width / 2, height, height / 3, "#FF00FF", 2))
   } else if (count == 270) {
-    stopDisplay()
+    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#FFAA00", 0))
+    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#FFAA00", 0))
+  } else if (count == 300) {
+    rockets.push(new Rocket(2 * width / 5, height, height / 3, "#FF00FF", 2))
+    rockets.push(new Rocket(3 * width / 5, height, height / 3, "#FF00FF", 2))
+  } else if (count == 330) {
+    rockets.push(new Rocket(width / 2, height, 2 * height / 3, "#FFAA00", 0))
+    rockets.push(new Rocket(width / 2, height, height / 3, "#00FFFF", 1))
+  } else if (count == 390) {
+    rockets.push(new Rocket(width / 5, height, height / 2, "#FF00FF", 2))
+  } else if (count == 405) {
+    rockets.push(new Rocket(2 * width / 5, height, height / 2, "#FF00FF", 2))
+  } else if (count == 420) {
+    rockets.push(new Rocket(3 * width / 5, height, height / 2, "#FF00FF", 2))
+  } else if (count == 435) {
+    rockets.push(new Rocket(4 * width / 5, height, height / 2, "#FF00FF", 2))
+  } else if (count == 480) {
+    rockets.push(new Rocket(4 * width / 5, height, height / 2, "#00FFFF", 1))
+  } else if (count == 495) {
+    rockets.push(new Rocket(3 * width / 5, height, height / 2, "#00FFFF", 1))
+  } else if (count == 510) {
+    rockets.push(new Rocket(2 * width / 5, height, height / 2, "#00FFFF", 1))
+  } else if (count == 525) {
+    rockets.push(new Rocket(width / 5, height, height / 2, "#00FFFF", 1))
+  } else if (count == 570) {
+    rockets.push(new Rocket(width / 6, height, 2 * height / 3, "#FFAA00", 0));
+    rockets.push(new Rocket(5 * width / 6, height, 2 * height / 3, "#FFAA00", 0));
+  } else if (count == 585) {
+    rockets.push(new Rocket(width / 3, height, height / 2, "#FF00FF", 2));
+    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#FF00FF", 2));
+  } else if (count == 600) {
+    rockets.push(new Rocket(width / 2, height, height / 3, "#00FFFF", 1))
   }
 }
