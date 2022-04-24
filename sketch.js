@@ -28,14 +28,14 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   startButton = new Button(10 * width / 50, 9 * height / 10, width / 5, height / 20, 200, 100, 100, "Start Display", 255, startButtonPressed);
-  randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "0", 0, setColour)
-  orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "1", 0, setColour, 0)
-  greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "2", 0, setColour, 1)
-  pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "3", 0, setColour, 2)
-  helpButton = new Button(width - height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "?", 255, instructions)
-  muteButton = new Button(height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "🔈", 0, muteButtonPressed)
-  buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton, muteButton]
-  colourIndex = -1
+  randomButton = new Button(width / 2, 9 * height / 10, height / 20, height / 20, 255, 255, 255, "0", 0, setColour);
+  orangeButton = new Button(5 * width / 8, 9 * height / 10, height / 20, height / 20, 255, 200, 0, "1", 0, setColour, 0);
+  greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "2", 0, setColour, 1);
+  pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "3", 0, setColour, 2);
+  helpButton = new Button(width - height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "?", 255, instructions);
+  muteButton = new Button(height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "🔈", 0, muteButtonPressed);
+  buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton, muteButton];
+  colourIndex = -1;
 }
 
 
@@ -59,23 +59,23 @@ function draw() {
     }
   }
   for (let i = 0; i < rockets.length; i++) {
-    let rocket = rockets[i]
-    rocket.update()
-    rocket.draw()
+    let rocket = rockets[i];
+    rocket.update();
+    rocket.draw();
     if (rocket.isMinY()) {
       createFirework(rocket.x, rocket.y, rocket.index);
-      rockets.splice(i, 1)
+      rockets.splice(i, 1);
     }
   }
   buttonsAreHovered = false;
   for (let button of buttons) {
     if (button.isHovered()) {
       buttonsAreHovered = true;
-      button.transparencyChange()
+      button.transparencyChange();
     } else {
-      button.solidColour()
+      button.solidColour();
     }
-    button.draw()
+    button.draw();
   }
 }
 
@@ -93,75 +93,75 @@ function mousePressed() {
   }
   for (let button of buttons) {
     if (button.isHovered()) {
-      button.buttonDown()
-      button.function(button)
+      button.buttonDown();
+      button.function(button);
     }
   }
 }
 
 function mouseReleased() {
   for (let button of buttons) {
-    button.buttonUp()
+    button.buttonUp();
   }
 }
 
 function startButtonPressed() {
   if (display) {
-    stopDisplay()
+    stopDisplay();
   } else {
-    startDisplay()
+    startDisplay();
   }
 }
 
 function startDisplay(button) {
   display = true;
-  startButton.text = "Stop Display"
+  startButton.text = "Stop Display";
 }
 
 function stopDisplay(button) {
   display = false;
   count = 0;
-  startButton.text = "Start Display"
+  startButton.text = "Start Display";
 }
 
 function setColour(button) {
   if (randomButton.isHovered()) {
-    colourIndex = -1
+    colourIndex = -1;
   } else {
-    colourIndex = button.index
+    colourIndex = button.index;
   }
 }
 
 function instructions() {
-  alert("INSTRUCTIONS\n•Click on the screen to make fireworks\n•Press the different buttons to switch colours\n•Or start a firework at the mouse by pressing the corrresponding keys:\n   Random - 0 or R\n   Green - 1\n   Orange - 2\n   Pink - 3\n•You can also watch a preprogrammed display by pressing the start display button")
+  alert("INSTRUCTIONS\n•Click on the screen to make fireworks\n•Press the different buttons to switch colours\n•Or start a firework at the mouse by pressing the corrresponding keys:\n   Random - 0 or R\n   Green - 1\n   Orange - 2\n   Pink - 3\n•You can also watch a preprogrammed display by pressing the start display button");
 }
 
 function muteButtonPressed() {
   if (soundOn) {
-    mute()
+    mute();
   } else {
-    unmute()
+    unmute();
   }
 }
 
 function mute() {
-  muteButton.text = "🔊"
-  soundOn = false
+  muteButton.text = "🔊";
+  soundOn = false;
 }
 
 function unmute() {
-  muteButton.text = "🔈"
-  soundOn = true
+  muteButton.text = "🔈";
+  soundOn = true;
 }
 
 function keyPressed() {
   if (!display && !buttonsAreHovered) {
     if (key == 0 || key == "R" || key == "r") {
       colourIndex = -1;
-      createFirework(mouseX, mouseY, floor(random(3)))
+      createFirework(mouseX, mouseY, floor(random(3)));
     } else if (key == 1 || key == 2 || key == 3) {
       colourIndex = key - 1;
-      createFirework(mouseX, mouseY, colourIndex)
+      createFirework(mouseX, mouseY, colourIndex);
     }
   }
 }
@@ -180,44 +180,44 @@ function createFirework(x, y, index) {
 
 function fireworkDisplay() {
   if (count == 30) {
-    rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0))
+    rockets.push(new Rocket(width / 3, height, height / 2, "#FFAA00", 0));
   } else if (count == 40) {
-    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#00FFFF", 1))
+    rockets.push(new Rocket(2 * width / 3, height, height / 2, "#00FFFF", 1));
   } else if (count == 70) {
-    rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2))
-    rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2))
+    rockets.push(new Rocket(width / 5, height, height / 3, "#FF00FF", 2));
+    rockets.push(new Rocket(4 * width / 5, height, height / 3, "#FF00FF", 2));
   } else if (count == 150) {
-    rockets.push(new Rocket(width / 2, height, height / 2, "#FFAA00", 0))
+    rockets.push(new Rocket(width / 2, height, height / 2, "#FFAA00", 0));
   } else if (count == 180) {
-    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#00FFFF", 1))
-    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#00FFFF", 1))
+    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#00FFFF", 1));
+    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#00FFFF", 1));
   } else if (count == 210) {
-    rockets.push(new Rocket(width / 2, height, height / 3, "#FF00FF", 2))
+    rockets.push(new Rocket(width / 2, height, height / 3, "#FF00FF", 2));
   } else if (count == 270) {
-    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#FFAA00", 0))
-    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#FFAA00", 0))
+    rockets.push(new Rocket(width / 3, height, 2 * height / 3, "#FFAA00", 0));
+    rockets.push(new Rocket(2 * width / 3, height, 2 * height / 3, "#FFAA00", 0));
   } else if (count == 300) {
-    rockets.push(new Rocket(2 * width / 5, height, height / 3, "#FF00FF", 2))
-    rockets.push(new Rocket(3 * width / 5, height, height / 3, "#FF00FF", 2))
+    rockets.push(new Rocket(2 * width / 5, height, height / 3, "#FF00FF", 2));
+    rockets.push(new Rocket(3 * width / 5, height, height / 3, "#FF00FF", 2));
   } else if (count == 330) {
-    rockets.push(new Rocket(width / 2, height, 2 * height / 3, "#FFAA00", 0))
-    rockets.push(new Rocket(width / 2, height, height / 3, "#00FFFF", 1))
+    rockets.push(new Rocket(width / 2, height, 2 * height / 3, "#FFAA00", 0));
+    rockets.push(new Rocket(width / 2, height, height / 3, "#00FFFF", 1));
   } else if (count == 390) {
-    rockets.push(new Rocket(width / 5, height, height / 2, "#FF00FF", 2))
+    rockets.push(new Rocket(width / 5, height, height / 2, "#FF00FF", 2));
   } else if (count == 405) {
-    rockets.push(new Rocket(2 * width / 5, height, height / 2, "#FF00FF", 2))
+    rockets.push(new Rocket(2 * width / 5, height, height / 2, "#FF00FF", 2));
   } else if (count == 420) {
-    rockets.push(new Rocket(3 * width / 5, height, height / 2, "#FF00FF", 2))
+    rockets.push(new Rocket(3 * width / 5, height, height / 2, "#FF00FF", 2));
   } else if (count == 435) {
-    rockets.push(new Rocket(4 * width / 5, height, height / 2, "#FF00FF", 2))
+    rockets.push(new Rocket(4 * width / 5, height, height / 2, "#FF00FF", 2));
   } else if (count == 480) {
-    rockets.push(new Rocket(4 * width / 5, height, height / 2, "#00FFFF", 1))
+    rockets.push(new Rocket(4 * width / 5, height, height / 2, "#00FFFF", 1));
   } else if (count == 495) {
-    rockets.push(new Rocket(3 * width / 5, height, height / 2, "#00FFFF", 1))
+    rockets.push(new Rocket(3 * width / 5, height, height / 2, "#00FFFF", 1));
   } else if (count == 510) {
-    rockets.push(new Rocket(2 * width / 5, height, height / 2, "#00FFFF", 1))
+    rockets.push(new Rocket(2 * width / 5, height, height / 2, "#00FFFF", 1));
   } else if (count == 525) {
-    rockets.push(new Rocket(width / 5, height, height / 2, "#00FFFF", 1))
+    rockets.push(new Rocket(width / 5, height, height / 2, "#00FFFF", 1));
   } else if (count == 570) {
     rockets.push(new Rocket(width / 6, height, 2 * height / 3, "#FFAA00", 0));
     rockets.push(new Rocket(5 * width / 6, height, 2 * height / 3, "#FFAA00", 0));
@@ -225,8 +225,8 @@ function fireworkDisplay() {
     rockets.push(new Rocket(width / 3, height, height / 2, "#FF00FF", 2));
     rockets.push(new Rocket(2 * width / 3, height, height / 2, "#FF00FF", 2));
   } else if (count == 600) {
-    rockets.push(new Rocket(width / 2, height, height / 3, "#00FFFF", 1))
+    rockets.push(new Rocket(width / 2, height, height / 3, "#00FFFF", 1));
   } else if (count == 660) {
-    stopDisplay()
+    stopDisplay();
   }
 }
