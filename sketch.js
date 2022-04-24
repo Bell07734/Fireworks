@@ -226,5 +226,7 @@ function fireworkDisplay() {
     rockets.push(new Rocket(2 * width / 3, height, height / 2, "#FF00FF", 2));
   } else if (count == 600) {
     rockets.push(new Rocket(width / 2, height, height / 3, "#00FFFF", 1))
+  } else if (count == 660) {
+    stopDisplay()
   }
 }
