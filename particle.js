@@ -25,6 +25,7 @@ class Particle {
     }
     draw() {
         stroke(this.colour);
+        strokeWeight(1)
         point(this.pos);
     }
     isMinVel() {

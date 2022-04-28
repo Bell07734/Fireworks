@@ -171,7 +171,7 @@ function createFirework(x, y, index) {
     sound.play();
   }
   let chosenColours = allColours[index];
-  for (let i = 0; i < 300 / chosenColours.length; i++) {
+  for (let i = 0; i < 450 / chosenColours.length; i++) {
     for (let j = 0; j < chosenColours.length; j++) {
       particles.push(new Particle(x, y, chosenColours[j]));
     }
