@@ -13,14 +13,14 @@ class Particle {
         this.colour = c;
 
         this.minVel = random(0.5, 3);
-        this.maxTime = random(30, 70);
+        this.maxTime = random(30, 100);
         this.time = 0;
     }
 
     update() {
         this.pos.add(this.vel);
         this.vel.add(this.gravity);
-        this.vel.mult(0.95);
+        this.vel.mult(0.94);
         this.time++;
     }
     draw() {
