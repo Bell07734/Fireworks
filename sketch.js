@@ -21,6 +21,9 @@ let rockets = [];
 let sound;
 let soundOn = true;
 
+let text1
+let text2
+
 function preload() {
   sound = loadSound("Sound.wav");
 }
@@ -36,6 +39,14 @@ function setup() {
   muteButton = new Button(height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "🔈", 0, muteButtonPressed);
   buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton, muteButton];
   colourIndex = -1;
+  text1 = createElement("h1", "Firework Simulator");
+  text2 = createElement("h3", "Made by Oliver");
+  text3 = createElement("h4", "Created using p5.js");
+  text4 = createElement("p", "Sound effects from <a href=mixkit.co>mixkit.co</a>");
+  text1.style("font-family", "Josefin Sans");
+  text2.style("font-family", "Josefin Sans");
+  text3.style("font-family", "Josefin Sans");
+  text4.style("font-family", "Josefin Sans")
 }
 
 
@@ -84,7 +95,8 @@ function draw() {
 //
 
 function mousePressed() {
-  if (!display && !buttonsAreHovered) {
+  console.log(mouseY, height, mouseY <= height)
+  if (!display && !buttonsAreHovered && mouseY < height) {
     if (colourIndex == -1) {
       createFirework(mouseX, mouseY, floor(random(3)));
     } else {
