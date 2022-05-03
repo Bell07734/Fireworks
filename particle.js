@@ -7,12 +7,13 @@ class Particle {
         this.pos = createVector(x, y);
         this.vel = p5.Vector.random2D();
         this.vel.mult(height / random(100, 200));
-        this.gravity = createVector(0, 0.1);
+        this.gravity = createVector(0, 0.075);
         this.center = createVector(x, y);
+        this.weight = random(0.5, 2.5)
 
         this.colour = c;
 
-        this.minVel = random(0.5, 3);
+        this.minVel = random(0.75, 2.5);
         this.maxTime = random(30, 100);
         this.time = 0;
     }
@@ -25,7 +26,7 @@ class Particle {
     }
     draw() {
         stroke(this.colour);
-        strokeWeight(1)
+        strokeWeight(this.weight)
         point(this.pos);
     }
     isMinVel() {
