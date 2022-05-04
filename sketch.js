@@ -42,7 +42,7 @@ function setup() {
   text1 = createElement("h1", "Firework Simulator");
   text2 = createElement("h3", "Made by Oliver");
   text3 = createElement("h4", "Created using p5.js");
-  text4 = createElement("p", "Sound effects from <a href=mixkit.co>mixkit.co</a>");
+  text4 = createElement("p", "Sound effects from <a href=https://mixkit.co/>mixkit.co</a>");
   text1.style("font-family", "Josefin Sans");
   text2.style("font-family", "Josefin Sans");
   text3.style("font-family", "Josefin Sans");
