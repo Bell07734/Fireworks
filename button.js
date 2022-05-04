@@ -46,7 +46,9 @@ class Button {
         strokeWeight(2);
         rect(this.x, this.y, this.width, this.height, this.height / 4);
         textAlign(CENTER, CENTER);
-        textSize(this.height / 2)
+        textSize(this.height / 2);
+        textStyle(BOLD);
+        textFont("Josefin Sans");
         fill(this.textColour);
         noStroke();
         text(this.text, this.x, this.y)
