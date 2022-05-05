@@ -169,11 +169,9 @@ function unmute() {
 function keyPressed() {
   if (!display && !buttonsAreHovered) {
     if (key == 0 || key == "R" || key == "r") {
-      colourIndex = -1;
       createFirework(mouseX, mouseY, floor(random(3)));
     } else if (key == 1 || key == 2 || key == 3) {
-      colourIndex = key - 1;
-      createFirework(mouseX, mouseY, colourIndex);
+      createFirework(mouseX, mouseY, key - 1);
     }
   }
 }
