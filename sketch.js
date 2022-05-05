@@ -36,7 +36,7 @@ function setup() {
   greenButton = new Button(6 * width / 8, 9 * height / 10, height / 20, height / 20, 0, 200, 200, "2", 0, setColour, 1);
   pinkButton = new Button(7 * width / 8, 9 * height / 10, height / 20, height / 20, 200, 0, 200, "3", 0, setColour, 2);
   helpButton = new Button(width - height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "?", 255, instructions);
-  muteButton = new Button(height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "🔈", 0, muteButtonPressed);
+  muteButton = new Button(height / 10, height / 10, height / 20, height / 20, 26, 115, 255, "🔊", 0, muteButtonPressed);
   buttons = [startButton, randomButton, orangeButton, greenButton, pinkButton, helpButton, muteButton];
   colourIndex = -1;
   text1 = createElement("h1", "Firework Simulator");
@@ -95,7 +95,6 @@ function draw() {
 //
 
 function mousePressed() {
-  console.log(mouseY, height, mouseY <= height)
   if (!display && !buttonsAreHovered && mouseY < height) {
     if (colourIndex == -1) {
       createFirework(mouseX, mouseY, floor(random(3)));
@@ -157,17 +156,17 @@ function muteButtonPressed() {
 }
 
 function mute() {
-  muteButton.text = "🔊";
+  muteButton.text = "🔈";
   soundOn = false;
 }
 
 function unmute() {
-  muteButton.text = "🔈";
+  muteButton.text = "🔊";
   soundOn = true;
 }
 
 function keyPressed() {
-  if (!display && !buttonsAreHovered) {
+  if (!display && !buttonsAreHovered && mouseY < height) {
     if (key == 0 || key == "R" || key == "r") {
       createFirework(mouseX, mouseY, floor(random(3)));
     } else if (key == 1 || key == 2 || key == 3) {
