@@ -174,7 +174,7 @@ function draw() {
 		scrollbar = false;
 	}
 
-	background(0);
+	background(0, 0, 0, 50);
 	if (display) {
 		fireworkDisplay();
 		count++;
