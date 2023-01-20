@@ -11,6 +11,8 @@ class Particle {
 		this.center = createVector(x, y);
 		this.weight = random(0.5, 2.5);
 
+		this.oldPos = this.pos;
+
 		this.colour = c;
 
 		this.minVel = random(0.75, 2.5);
@@ -19,6 +21,7 @@ class Particle {
 	}
 
 	update() {
+		this.oldPos = this.pos;
 		this.pos.add(this.vel);
 		this.vel.add(this.gravity);
 		this.vel.mult(0.94);
@@ -27,7 +30,7 @@ class Particle {
 	draw() {
 		stroke(this.colour);
 		strokeWeight(this.weight);
-		point(this.pos);
+		line(this.oldPos.x, this.oldPos.y, this.pos.x, this.pos.y);
 	}
 	isMinVel() {
 		return sqrt(sq(this.vel.x) + sq(this.vel.y)) < this.minVel;

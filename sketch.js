@@ -40,6 +40,7 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	background(0);
 
 	style = document.createElement("style");
 	style.innerHTML = `body::-webkit-scrollbar {display: none;}`;
@@ -173,8 +174,12 @@ function draw() {
 		document.head.appendChild(style);
 		scrollbar = false;
 	}
+	if (particles.length <= 5) {
+		background(0, 0, 0, 100);
+	} else {
+		background(0, 0, 0, 40);
+	}
 
-	background(0, 0, 0, 50);
 	if (display) {
 		fireworkDisplay();
 		count++;
