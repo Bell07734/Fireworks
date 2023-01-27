@@ -7,7 +7,7 @@ class Particle {
 		this.pos = createVector(x, y);
 		this.vel = p5.Vector.random2D();
 		this.vel.mult(height / random(75, 200));
-		this.gravity = createVector(0, 0.075);
+		this.gravity = createVector(0, 0.1);
 		this.center = createVector(x, y);
 		this.weight = random(0.5, 2.5);
 
@@ -33,7 +33,9 @@ class Particle {
 		line(this.oldPos.x, this.oldPos.y, this.pos.x, this.pos.y);
 	}
 	isMinVel() {
-		return sqrt(sq(this.vel.x) + sq(this.vel.y)) < this.minVel;
+		return (
+			sqrt(sq(this.vel.x) + sq(this.vel.y)) < this.minVel && this.y > this.oldY
+		);
 	}
 
 	isMaxTime() {
